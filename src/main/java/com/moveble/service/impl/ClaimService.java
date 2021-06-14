@@ -23,7 +23,7 @@ public class ClaimService implements IClaimService {
     public List<Claim> findAll() {
         try {
             return claimRepository.findAll();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -33,7 +33,7 @@ public class ClaimService implements IClaimService {
     public Claim update(Claim claim) {
         try {
             return claimRepository.save(claim);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -43,7 +43,7 @@ public class ClaimService implements IClaimService {
     public Claim create(Claim claim) {
         try {
             return claimRepository.save(claim);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -52,7 +52,17 @@ public class ClaimService implements IClaimService {
     public Claim findByName(String name) {
         try {
             return claimRepository.findByName(name);
-        }catch (Exception e){
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    @Transactional
+    public void delete(int id) {
+        try {
+            claimRepository.deleteById(id);
+        } catch (Exception e) {
             throw e;
         }
     }

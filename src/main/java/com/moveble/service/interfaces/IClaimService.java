@@ -13,5 +13,7 @@ public interface IClaimService {
 
     Claim create(Claim claim);
 
+    void delete(int id);
+
     Claim findByName(String name);
 }

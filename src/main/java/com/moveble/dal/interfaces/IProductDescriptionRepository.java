@@ -6,4 +6,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IProductDescriptionRepository extends JpaRepository<ProductDescription, Integer> {
+
+    ProductDescription findByCode(String code);
+
+    ProductDescription findByName(String name);
+
+    ProductDescription findById(int id);
+
 }
