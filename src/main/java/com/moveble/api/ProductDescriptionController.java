@@ -40,4 +40,13 @@ public class ProductDescriptionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "update")
+    public ResponseEntity<ProductDescription> update(@RequestBody ProductDescription productDescription) {
+        try {
+            return ResponseEntity.ok(productDescriptionService.update(productDescription));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
