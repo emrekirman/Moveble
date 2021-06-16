@@ -3,6 +3,8 @@ package com.moveble.entity;
 import com.moveble.entity.base.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -10,12 +12,18 @@ import java.util.List;
 public class User extends BaseEntity {
 
     @Column(name = "username")
+    @NotNull(message = "Kullanıcı adı alanı boş geçilemez")
+    @NotBlank(message = "Kullanıcı adı alanı boş geçilemez")
     private String username;
 
     @Column(name = "password")
+    @NotNull(message = "Şifre alanı boş geçilemez")
+    @NotBlank(message = "Şifre alanı boş geçilemez")
     private String password;
 
     @Column(name = "name")
+    @NotNull(message = "Ad alanı boş geçilemez")
+    @NotBlank(message = "Ad alanı boş geçilemez")
     private String name;
 
     @ManyToMany(cascade = CascadeType.ALL)

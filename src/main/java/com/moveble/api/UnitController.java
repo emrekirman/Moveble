@@ -5,9 +5,14 @@ import com.moveble.service.interfaces.IUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -30,7 +35,7 @@ public class UnitController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "units/create")
-    public ResponseEntity<Unit> create(@RequestBody Unit unit) {
+    public ResponseEntity<Unit> create(@Valid @RequestBody Unit unit) {
         try {
             unitService.create(unit);
             return ResponseEntity.ok(unit);
@@ -50,11 +55,13 @@ public class UnitController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "units/update")
-    public ResponseEntity<Unit> update(@RequestBody Unit unit) {
-        try {
+    public ResponseEntity<Unit> update(@Valid @RequestBody Unit unit) {
+//        try {
             return ResponseEntity.ok(unitService.update(unit));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
     }
+
+
 }

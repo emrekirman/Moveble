@@ -1,5 +1,6 @@
 package com.moveble.service.interfaces;
 
+import com.moveble.dto.StockDto;
 import com.moveble.entity.VoucherMove;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface IVoucherMoveService {
     void delete(int id);
 
     List<VoucherMove> findByMovementType(int movementType);
+
+    List<StockDto> getStocks();
 }

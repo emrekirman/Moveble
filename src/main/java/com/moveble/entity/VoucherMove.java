@@ -3,6 +3,9 @@ package com.moveble.entity;
 import com.moveble.entity.base.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "voucher_move")
@@ -13,19 +16,20 @@ public class VoucherMove extends BaseEntity {
     private MeasurementUnit measurementUnit;
 
     @Column(name = "quantity")
+    @Positive(message = "Miktar 0'dan büyük olmalıdır.")
     private double quantity;
 
     @Column(name = "unit_price")
+    @Positive(message = "Birim fiyat 0'dan büyük olmalıdır.")
     private double unitPrice;
 
     @Column(name = "amount")
+    @Positive(message = "Tutar 0'dan büyük olmalıdır.")
     private double amount;
 
     @Column(name = "remaining_amount")
+    @Positive(message = "Kalan miktar 0'dan büyük olmalıdır.")
     private double remainingAmount;
-
-    @Column(name = "movement_type")
-    private int movementType;
 
     @ManyToOne
     @JoinColumn(name = "voucher_id")
@@ -82,14 +86,6 @@ public class VoucherMove extends BaseEntity {
 
     public void setRemainingAmount(double remainingAmount) {
         this.remainingAmount = remainingAmount;
-    }
-
-    public int getMovementType() {
-        return movementType;
-    }
-
-    public void setMovementType(int movementType) {
-        this.movementType = movementType;
     }
 
     public Voucher getVoucher() {
