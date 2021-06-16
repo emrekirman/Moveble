@@ -15,7 +15,7 @@ public interface IVoucherMoveService {
 
     void delete(int id);
 
-    List<VoucherMove> findByMovementType(int movementType);
+    List<VoucherMove> findByVoucherMovementType(int movementType);
 
     List<StockDto> getStocks();
 }

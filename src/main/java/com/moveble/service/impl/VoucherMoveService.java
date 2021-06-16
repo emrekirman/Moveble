@@ -63,9 +63,9 @@ public class VoucherMoveService implements IVoucherMoveService {
     }
 
     @Override
-    public List<VoucherMove> findByMovementType(int movementType) {
+    public List<VoucherMove> findByVoucherMovementType(int movementType) {
         try {
-            return voucherMoveRepository.findByMovementType(movementType);
+            return voucherMoveRepository.findByVoucherMovementType(movementType);
         } catch (Exception e) {
             throw e;
         }
