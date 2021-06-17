@@ -1,6 +1,7 @@
 package com.moveble.core.exception.handler;
 
 import com.moveble.core.exception.TokenAlreadyHaveException;
+import com.moveble.core.exception.TokenNotEqualException;
 import com.moveble.core.exception.TokenNotFoundException;
 import com.moveble.core.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,14 @@ public class ExceptionsHandler {
     @ExceptionHandler(TokenNotFoundException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
-    public ResponseEntity<String> handleTokenNtFoundException(TokenNotFoundException exception) {
+    public ResponseEntity<String> handleTokenNotFoundException(TokenNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(TokenNotEqualException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    public ResponseEntity<String> handleTokenNotEqualException(TokenNotEqualException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage());
     }
 }

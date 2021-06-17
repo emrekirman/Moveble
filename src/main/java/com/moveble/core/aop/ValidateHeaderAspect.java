@@ -21,7 +21,7 @@ public class ValidateHeaderAspect {
             HttpServletRequest request = SessionHelper.getServletRequest();
             String token = request.getHeader("token");
 
-            String sessionToken = (String) request.getSession(false).getAttribute("userSession");
+            String sessionToken = (String) request.getSession(false).getAttribute("userSessionToken");
 //            SessionModel userModel = (SessionModel) request.getSession().getAttribute("scopedTarget.sessionModel");
             if (token == null || token.isEmpty() || sessionToken == null || sessionToken.isEmpty()) {
                 throw new TokenNotFoundException("Lütfen oturum açınız");
