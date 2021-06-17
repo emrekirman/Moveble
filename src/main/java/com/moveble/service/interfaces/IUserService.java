@@ -1,7 +1,7 @@
 package com.moveble.service.interfaces;
 
-import com.moveble.entity.TransactionType;
 import com.moveble.entity.User;
+import com.moveble.core.exception.UserNotFoundException;
 
 import java.util.List;
 
@@ -15,4 +15,8 @@ public interface IUserService {
     User findByUsername(String username);
 
     void delete(int id);
+
+    User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException;
+
+    boolean existsByUsernameAndPassword(String username, String password) throws UserNotFoundException;
 }

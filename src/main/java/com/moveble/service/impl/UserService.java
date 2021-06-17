@@ -2,12 +2,15 @@ package com.moveble.service.impl;
 
 import com.moveble.dal.interfaces.IUserRepository;
 import com.moveble.entity.User;
+import com.moveble.core.exception.UserNotFoundException;
 import com.moveble.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class UserService implements IUserService {
 
     private IUserRepository userRepository;
@@ -60,6 +63,32 @@ public class UserService implements IUserService {
     public void delete(int id) {
         try {
             userRepository.deleteById(id);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException {
+        try {
+            User user = userRepository.findUserByUsernameAndPassword(username, password);
+            if (user == null) {
+                throw new UserNotFoundException("Kullanıcı bulunamadı");
+            }
+            return user;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public boolean existsByUsernameAndPassword(String username, String password) throws UserNotFoundException {
+        try {
+            boolean isExist = userRepository.existsByUsernameAndPassword(username, password);
+            if (!isExist) {
+                throw new UserNotFoundException("Kullanıcı bulunamadı");
+            }
+            return isExist;
         } catch (Exception e) {
             throw e;
         }
