@@ -1,6 +1,7 @@
 package com.moveble.service.impl;
 
 import com.moveble.dal.interfaces.IUserRepository;
+import com.moveble.dto.LoginDto;
 import com.moveble.entity.User;
 import com.moveble.core.exception.UserNotFoundException;
 import com.moveble.service.interfaces.IUserService;
@@ -89,6 +90,19 @@ public class UserService implements IUserService {
                 throw new UserNotFoundException("Kullanıcı bulunamadı");
             }
             return isExist;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public User findUserByLoginDto(LoginDto loginDto) throws UserNotFoundException {
+        try {
+            User user = userRepository.findUserByLoginDto(loginDto);
+            if (user == null) {
+                throw new UserNotFoundException("Kullanıcı bulunamadı");
+            }
+            return user;
         } catch (Exception e) {
             throw e;
         }

@@ -1,5 +1,6 @@
 package com.moveble.service.interfaces;
 
+import com.moveble.dto.LoginDto;
 import com.moveble.entity.User;
 import com.moveble.core.exception.UserNotFoundException;
 
@@ -19,4 +20,6 @@ public interface IUserService {
     User findUserByUsernameAndPassword(String username, String password) throws UserNotFoundException;
 
     boolean existsByUsernameAndPassword(String username, String password) throws UserNotFoundException;
+
+    User findUserByLoginDto(LoginDto loginDto) throws UserNotFoundException;
 }
