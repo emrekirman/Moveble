@@ -1,5 +1,6 @@
 package com.moveble.api;
 
+import com.moveble.core.aop.annotation.ValidateHeader;
 import com.moveble.entity.Unit;
 import com.moveble.service.interfaces.IUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@ValidateHeader
 public class UnitController {
 
     private IUnitService unitService;
@@ -57,7 +59,7 @@ public class UnitController {
     @RequestMapping(method = RequestMethod.POST, value = "units/update")
     public ResponseEntity<Unit> update(@Valid @RequestBody Unit unit) {
 //        try {
-            return ResponseEntity.ok(unitService.update(unit));
+        return ResponseEntity.ok(unitService.update(unit));
 //        } catch (Exception e) {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 //        }

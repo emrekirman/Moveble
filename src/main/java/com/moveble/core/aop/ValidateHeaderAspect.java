@@ -2,40 +2,32 @@ package com.moveble.core.aop;
 
 import com.moveble.core.aop.annotation.ValidateHeader;
 import com.moveble.core.exception.TokenNotEqualException;
-import com.moveble.core.exception.UserNotFoundException;
-import com.moveble.core.session.SessionModel;
+import com.moveble.core.exception.TokenNotFoundException;
+import com.moveble.core.helper.SessionHelper;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 @Aspect
 @Component
 public class ValidateHeaderAspect {
 
-    private SessionModel sessionModel;
-
-    @Autowired
-    public ValidateHeaderAspect(SessionModel sessionModel) {
-        this.sessionModel = sessionModel;
-    }
-
     @Before("@annotation(validateHeader)")
-    public void dBefore(ValidateHeader validateHeader) throws UserNotFoundException, TokenNotEqualException {
+    public void dBefore(ValidateHeader validateHeader) throws TokenNotEqualException, TokenNotFoundException {
         try {
-            HttpServletRequest request = currentRequest();
+            HttpServletRequest request = SessionHelper.getServletRequest();
             String token = request.getHeader("token");
 
-            if (token == null || token.isEmpty() || sessionModel.getToken().isEmpty()) {
-                throw new UserNotFoundException("Lütfen oturum açınız");
+            String sessionToken = (String) request.getSession(false).getAttribute("userSession");
+//            SessionModel userModel = (SessionModel) request.getSession().getAttribute("scopedTarget.sessionModel");
+            if (token == null || token.isEmpty() || sessionToken == null || sessionToken.isEmpty()) {
+                throw new TokenNotFoundException("Lütfen oturum açınız");
             }
 
-            if (sessionModel.getToken().equals(token)) {
+            if (!sessionToken.equals(token)) {
                 throw new TokenNotEqualException("Giriş bilgileriniz eşleşmiyor");
             }
         } catch (Exception e) {
@@ -43,12 +35,5 @@ public class ValidateHeaderAspect {
         }
 
 
-    }
-
-
-    private HttpServletRequest currentRequest() {
-        // Use getRequestAttributes because of its return null if none bound
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return Optional.ofNullable(servletRequestAttributes).map(ServletRequestAttributes::getRequest).orElse(null);
     }
 }
