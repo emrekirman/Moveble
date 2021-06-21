@@ -26,7 +26,7 @@ public class SessionService implements ISessionService {
     @Override
     public String login(LoginDto loginDto) throws UserNotFoundException, TokenAlreadyHaveException {
         try {
-            User user = userService.findUserByUsernameAndPassword(loginDto.getUsername(), loginDto.getPassword());
+            User user = userService.findUserByLoginDto(loginDto);
 
 
             String token = TokenGenerator.generateToken();

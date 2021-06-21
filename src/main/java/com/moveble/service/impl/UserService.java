@@ -98,7 +98,7 @@ public class UserService implements IUserService {
     @Override
     public User findUserByLoginDto(LoginDto loginDto) throws UserNotFoundException {
         try {
-            User user = userRepository.findUserByLoginDto(loginDto);
+            User user = userRepository.findUserByUsernameAndPassword(loginDto.getUsername(), loginDto.getPassword());
             if (user == null) {
                 throw new UserNotFoundException("Kullanıcı bulunamadı");
             }
