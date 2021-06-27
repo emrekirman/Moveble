@@ -9,4 +9,9 @@ public interface ISessionService {
     String login(LoginDto loginDto) throws UserNotFoundException, TokenAlreadyHaveException;
 
     void logOut();
+
+    String getToken();
+
+    boolean equalToken(String token);
+
 }

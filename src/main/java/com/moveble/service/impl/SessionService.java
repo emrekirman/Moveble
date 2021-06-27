@@ -54,4 +54,14 @@ public class SessionService implements ISessionService {
             throw e;
         }
     }
+
+    @Override
+    public String getToken() {
+        return SessionHelper.getServletRequest().getSession().getAttribute("userSessionToken").toString();
+    }
+
+    @Override
+    public boolean equalToken(String token) {
+        return this.getToken().equals(token);
+    }
 }
