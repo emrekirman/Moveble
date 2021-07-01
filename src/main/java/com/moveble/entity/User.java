@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "moveble_user")
 public class User extends BaseEntity {
 
     @Column(name = "username")
