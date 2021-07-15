@@ -1,6 +1,5 @@
 package com.moveble.service.interfaces;
 
-import com.moveble.entity.Claim;
 import com.moveble.entity.TransactionType;
 
 import java.util.List;

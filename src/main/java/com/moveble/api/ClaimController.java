@@ -20,7 +20,7 @@ public class ClaimController {
         this.claimService = claimService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "create")
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Claim> create(@RequestBody Claim claim) {
         try {
             return ResponseEntity.ok(claimService.create(claim));
@@ -29,7 +29,7 @@ public class ClaimController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "update")
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Claim> update(@RequestBody Claim claim) {
         try {
             return ResponseEntity.ok(claimService.update(claim));
@@ -38,7 +38,7 @@ public class ClaimController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Claim>> getAll() {
         try {
             return ResponseEntity.ok(claimService.findAll());
@@ -46,9 +46,9 @@ public class ClaimController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-    @RequestMapping(method = RequestMethod.GET, value = "getByName")
-    public ResponseEntity<Claim> getByName(@RequestParam("name") String name) {
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/{name}")
+    public ResponseEntity<Claim> getByName(@PathVariable("name") String name) {
         try {
             return ResponseEntity.ok(claimService.findByName(name));
         } catch (Exception e) {
@@ -56,11 +56,12 @@ public class ClaimController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "delete")
-    public ResponseEntity<Boolean> delete(@RequestParam("id") int id) {
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         try {
             claimService.delete(id);
-            return ResponseEntity.ok(true);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

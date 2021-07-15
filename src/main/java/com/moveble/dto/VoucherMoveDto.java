@@ -1,5 +1,8 @@
 package com.moveble.dto;
 
+import lombok.Data;
+
+@Data
 public class VoucherMoveDto {
 
     private int id;

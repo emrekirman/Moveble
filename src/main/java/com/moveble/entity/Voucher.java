@@ -3,6 +3,8 @@ package com.moveble.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.moveble.entity.base.BaseEntity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "voucher")
+@Data
 public class Voucher extends BaseEntity {
 
     @Column(name = "no")
@@ -70,99 +73,4 @@ public class Voucher extends BaseEntity {
     @JsonProperty("measurementUnit")
     private MeasurementUnit measurementUnit;
 
-    public int getNo() {
-        return no;
-    }
-
-    public void setNo(int no) {
-        this.no = no;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getDocumentRest() {
-        return documentRest;
-    }
-
-    public void setDocumentRest(String documentRest) {
-        this.documentRest = documentRest;
-    }
-
-    public Date getRestDate() {
-        return restDate;
-    }
-
-    public void setRestDate(Date restDate) {
-        this.restDate = restDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getRestNo() {
-        return restNo;
-    }
-
-    public void setRestNo(String restNo) {
-        this.restNo = restNo;
-    }
-
-    public int getMovementType() {
-        return movementType;
-    }
-
-    public void setMovementType(int movementType) {
-        this.movementType = movementType;
-    }
-
-    public Current getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Current current) {
-        this.current = current;
-    }
-
-    public TransactionType getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
-    }
-
-    public List<VoucherMove> getVoucherMoveList() {
-        return voucherMoveList;
-    }
-
-    public void setVoucherMoveList(List<VoucherMove> voucherMoveList) {
-        this.voucherMoveList = voucherMoveList;
-    }
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public MeasurementUnit getMeasurementUnit() {
-        return measurementUnit;
-    }
-
-    public void setMeasurementUnit(MeasurementUnit measurementUnit) {
-        this.measurementUnit = measurementUnit;
-    }
 }

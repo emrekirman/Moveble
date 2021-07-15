@@ -1,6 +1,5 @@
 package com.moveble.service.interfaces;
 
-import com.moveble.dal.interfaces.IClaimRepository;
 import com.moveble.entity.Claim;
 
 import java.util.List;
@@ -16,4 +15,5 @@ public interface IClaimService {
     void delete(int id);
 
     Claim findByName(String name);
+    
 }
