@@ -18,4 +18,6 @@ public interface IVoucherService {
     List<Voucher> findAllByMovementType(int movementType);
 
     void delete(int id);
+
+    Voucher findById(int id);
 }

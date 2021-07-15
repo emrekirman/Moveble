@@ -3,6 +3,7 @@ package com.moveble.service.impl;
 import com.moveble.dal.interfaces.IProductDescriptionRepository;
 import com.moveble.entity.ProductDescription;
 import com.moveble.service.interfaces.IProductDescriptionService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ProductDescriptionService implements IProductDescriptionService {
 
-    private IProductDescriptionRepository productDescriptionRepository;
-
-    @Autowired
-    public ProductDescriptionService(IProductDescriptionRepository productDescriptionRepository) {
-        this.productDescriptionRepository = productDescriptionRepository;
-    }
+    private final IProductDescriptionRepository productDescriptionRepository;
 
     @Override
     public List<ProductDescription> findAll() {

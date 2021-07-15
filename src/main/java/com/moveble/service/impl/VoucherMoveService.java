@@ -4,6 +4,7 @@ import com.moveble.dal.interfaces.IVoucherMoveRepository;
 import com.moveble.dto.StockDto;
 import com.moveble.entity.VoucherMove;
 import com.moveble.service.interfaces.IVoucherMoveService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,14 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class VoucherMoveService implements IVoucherMoveService {
 
-    private IVoucherMoveRepository voucherMoveRepository;
-
-    @Autowired
-    public VoucherMoveService(IVoucherMoveRepository voucherMoveRepository) {
-        this.voucherMoveRepository = voucherMoveRepository;
-    }
+    private final IVoucherMoveRepository voucherMoveRepository;
 
     @Override
     public List<VoucherMove> findAll() {

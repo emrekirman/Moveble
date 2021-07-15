@@ -8,20 +8,17 @@ import com.moveble.dto.LoginDto;
 import com.moveble.entity.User;
 import com.moveble.service.interfaces.ISessionService;
 import com.moveble.service.interfaces.IUserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Service
+@AllArgsConstructor
 public class SessionService implements ISessionService {
 
-    private IUserService userService;
-
-    @Autowired
-    public SessionService(IUserService userService) {
-        this.userService = userService;
-    }
+    private final IUserService userService;
 
     @Override
     public String login(LoginDto loginDto) throws UserNotFoundException, TokenAlreadyHaveException {

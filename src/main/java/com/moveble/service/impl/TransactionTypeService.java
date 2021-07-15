@@ -3,6 +3,7 @@ package com.moveble.service.impl;
 import com.moveble.dal.interfaces.ITransactionTypeRepository;
 import com.moveble.entity.TransactionType;
 import com.moveble.service.interfaces.ITransactionTypeService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class TransactionTypeService implements ITransactionTypeService {
 
-    private ITransactionTypeRepository transactionTypeRepository;
-
-    @Autowired
-    public TransactionTypeService(ITransactionTypeRepository transactionTypeRepository) {
-        this.transactionTypeRepository = transactionTypeRepository;
-    }
+    private final ITransactionTypeRepository transactionTypeRepository;
 
     @Override
     public List<TransactionType> findAll() {

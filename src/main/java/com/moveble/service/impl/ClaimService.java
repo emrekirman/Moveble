@@ -3,6 +3,7 @@ package com.moveble.service.impl;
 import com.moveble.dal.interfaces.IClaimRepository;
 import com.moveble.entity.Claim;
 import com.moveble.service.interfaces.IClaimService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ClaimService implements IClaimService {
 
-    private IClaimRepository claimRepository;
-
-    @Autowired
-    public ClaimService(IClaimRepository claimRepository) {
-        this.claimRepository = claimRepository;
-    }
+    private final IClaimRepository claimRepository;
 
     @Override
     public List<Claim> findAll() {

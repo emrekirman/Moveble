@@ -2,7 +2,7 @@ package com.moveble.api;
 
 import com.moveble.entity.ProductDescription;
 import com.moveble.service.interfaces.IProductDescriptionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,16 +14,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/productDescription")
+@AllArgsConstructor
 public class ProductDescriptionController {
 
-    private IProductDescriptionService productDescriptionService;
+    private final IProductDescriptionService productDescriptionService;
 
-    @Autowired
-    public ProductDescriptionController(IProductDescriptionService productDescriptionService) {
-        this.productDescriptionService = productDescriptionService;
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ProductDescription>> getAll() {
         try {
             return ResponseEntity.ok(productDescriptionService.findAll());
@@ -32,7 +28,7 @@ public class ProductDescriptionController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "create")
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ProductDescription> create(@RequestBody ProductDescription productDescription) {
         try {
             return ResponseEntity.ok(productDescriptionService.create(productDescription));
@@ -41,7 +37,7 @@ public class ProductDescriptionController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "update")
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<ProductDescription> update(@RequestBody ProductDescription productDescription) {
         try {
             return ResponseEntity.ok(productDescriptionService.update(productDescription));

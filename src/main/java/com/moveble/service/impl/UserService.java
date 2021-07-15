@@ -5,6 +5,7 @@ import com.moveble.dto.LoginDto;
 import com.moveble.entity.User;
 import com.moveble.core.exception.UserNotFoundException;
 import com.moveble.service.interfaces.IUserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserService implements IUserService {
 
-    private IUserRepository userRepository;
-
-    @Autowired
-    public UserService(IUserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final IUserRepository userRepository;
 
     @Override
     public List<User> findAll() {

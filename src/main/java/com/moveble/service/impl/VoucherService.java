@@ -3,6 +3,7 @@ package com.moveble.service.impl;
 import com.moveble.dal.interfaces.IVoucherRepository;
 import com.moveble.entity.Voucher;
 import com.moveble.service.interfaces.IVoucherService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class VoucherService implements IVoucherService {
 
-    private IVoucherRepository voucherRepository;
-
-    @Autowired
-    public VoucherService(IVoucherRepository voucherRepository) {
-        this.voucherRepository = voucherRepository;
-    }
+    private final IVoucherRepository voucherRepository;
 
     @Override
     public List<Voucher> findAll() {
@@ -81,6 +78,15 @@ public class VoucherService implements IVoucherService {
         try {
             voucherRepository.deleteById(id);
         } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public Voucher findById(int id){
+        try {
+            return voucherRepository.findById(id).get();
+        }catch (Exception e){
             throw e;
         }
     }

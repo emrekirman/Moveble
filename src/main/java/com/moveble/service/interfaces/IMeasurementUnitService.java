@@ -13,4 +13,6 @@ public interface IMeasurementUnitService {
     MeasurementUnit update(MeasurementUnit measurementUnit);
 
     void delete(int id);
+
+    MeasurementUnit findById(int id);
 }

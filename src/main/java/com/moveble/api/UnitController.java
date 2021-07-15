@@ -3,7 +3,7 @@ package com.moveble.api;
 import com.moveble.core.aop.annotation.ValidateHeader;
 import com.moveble.entity.Unit;
 import com.moveble.service.interfaces.IUnitService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +12,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/units")
 @ValidateHeader
+@AllArgsConstructor
 public class UnitController {
 
-    private IUnitService unitService;
+    private final IUnitService unitService;
 
-    @Autowired
-    public UnitController(IUnitService unitService) {
-        this.unitService = unitService;
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "units/getAll")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Unit>> getAll() {
         try {
             return ResponseEntity.ok(unitService.getAll());
@@ -32,7 +28,7 @@ public class UnitController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "units/create")
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Unit> create(@Valid @RequestBody Unit unit) {
         try {
             unitService.create(unit);
@@ -42,7 +38,7 @@ public class UnitController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "units/findByName")
+    @RequestMapping(method = RequestMethod.GET, value = "findByName")
     public ResponseEntity<Unit> findByName(@RequestParam("name") String name) {
         try {
             return ResponseEntity.ok(unitService.findByName(name));
@@ -52,13 +48,23 @@ public class UnitController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "units/update")
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<Unit> update(@Valid @RequestBody Unit unit) {
 //        try {
         return ResponseEntity.ok(unitService.update(unit));
 //        } catch (Exception e) {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 //        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+        try {
+            unitService.delete(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

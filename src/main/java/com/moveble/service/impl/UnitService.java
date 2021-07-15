@@ -3,6 +3,7 @@ package com.moveble.service.impl;
 import com.moveble.dal.interfaces.IUnitRepository;
 import com.moveble.entity.Unit;
 import com.moveble.service.interfaces.IUnitService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UnitService implements IUnitService {
 
-    private IUnitRepository unitRepository;
-
-    @Autowired
-    public UnitService(IUnitRepository unitRepository) {
-        this.unitRepository = unitRepository;
-    }
+    private final IUnitRepository unitRepository;
 
     @Override
     public List<Unit> getAll() {
@@ -52,6 +49,15 @@ public class UnitService implements IUnitService {
     public Unit update(Unit unit) {
         try {
             return unitRepository.save(unit);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        try {
+            unitRepository.deleteById(id);
         } catch (Exception e) {
             throw e;
         }

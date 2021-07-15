@@ -5,6 +5,7 @@ import com.moveble.core.exception.TokenAlreadyHaveException;
 import com.moveble.dto.LoginDto;
 import com.moveble.core.exception.UserNotFoundException;
 import com.moveble.service.interfaces.ISessionService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +18,10 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping(value = "/api/auth")
 @CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000", "https://localhost:4200", "http://localhost:4200"})
+@AllArgsConstructor
 public class LoginController {
 
-    private ISessionService sessionService;
-
-    @Autowired
-    public LoginController(ISessionService sessionService) {
-        this.sessionService = sessionService;
-    }
-
+    private final ISessionService sessionService;
 
     @RequestMapping(method = RequestMethod.POST, value = "login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDto loginDto) throws UserNotFoundException, TokenAlreadyHaveException {

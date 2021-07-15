@@ -2,6 +2,7 @@ package com.moveble.api;
 
 import com.moveble.entity.Claim;
 import com.moveble.service.interfaces.IClaimService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,14 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/claim")
+@AllArgsConstructor
 public class ClaimController {
 
-    private IClaimService claimService;
-
-    @Autowired
-    public ClaimController(IClaimService claimService) {
-        this.claimService = claimService;
-    }
+    private final IClaimService claimService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Claim> create(@RequestBody Claim claim) {

@@ -13,4 +13,6 @@ public interface IUnitService {
     Unit findByName(String name);
 
     Unit update(Unit unit);
+
+    void delete(int id);
 }

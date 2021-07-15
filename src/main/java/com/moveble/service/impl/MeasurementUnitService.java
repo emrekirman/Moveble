@@ -3,6 +3,7 @@ package com.moveble.service.impl;
 import com.moveble.dal.interfaces.IMeasurementUnitRepository;
 import com.moveble.entity.MeasurementUnit;
 import com.moveble.service.interfaces.IMeasurementUnitService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class MeasurementUnitService implements IMeasurementUnitService {
 
-    private IMeasurementUnitRepository repository;
-
-    @Autowired
-    public MeasurementUnitService(IMeasurementUnitRepository repository) {
-        this.repository = repository;
-    }
+    private final IMeasurementUnitRepository repository;
 
     @Override
     @Transactional
@@ -54,7 +51,16 @@ public class MeasurementUnitService implements IMeasurementUnitService {
     public void delete(int id) {
         try {
             repository.deleteById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public MeasurementUnit findById(int id) {
+        try {
+            return repository.findById(id).get();
+        } catch (Exception e) {
             throw e;
         }
     }
