@@ -13,4 +13,6 @@ public interface ITransactionTypeService {
     TransactionType create(TransactionType transactionType);
 
     void delete(int id);
+
+    TransactionType findById(int id);
 }

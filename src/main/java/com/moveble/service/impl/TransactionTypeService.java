@@ -54,4 +54,13 @@ public class TransactionTypeService implements ITransactionTypeService {
             throw e;
         }
     }
+
+    @Override
+    public TransactionType findById(int id) {
+        try {
+            return transactionTypeRepository.findById(id).get();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
