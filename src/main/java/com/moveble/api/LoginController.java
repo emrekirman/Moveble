@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping(value = "/api/auth")
-@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000", "https://localhost:4200", "http://localhost:4200"})
+//@CrossOrigin(origins = {"https://localhost:3000", "http://localhost:3000", "https://localhost:4200", "http://localhost:4200"})
 @AllArgsConstructor
 public class LoginController {
 
