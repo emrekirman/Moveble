@@ -8,13 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
-@Component
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionsHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -46,8 +42,8 @@ public class ExceptionsHandler {
     @ExceptionHandler(TokenNotFoundException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
-    public ResponseEntity<String> handleTokenNotFoundException(TokenNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(exception.getMessage());
+    public ResponseEntity<?> handleTokenNotFoundException(TokenNotFoundException exception) {
+        return new ResponseEntity(exception.getMessage(), HttpStatus.NO_CONTENT);
     }
 
     @ExceptionHandler(TokenNotEqualException.class)

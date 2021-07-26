@@ -28,11 +28,7 @@ public class MeasurementUnitsController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<MeasurementUnit>> getAll() {
-        try {
-            return ResponseEntity.ok(measurementUnitService.getAll());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        return ResponseEntity.ok(measurementUnitService.getAll());
     }
 
 
