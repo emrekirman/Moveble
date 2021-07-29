@@ -34,7 +34,6 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "logout")
-    @ValidateHeader
     public ResponseEntity<String> logout() {
         try {
             sessionService.logOut();
